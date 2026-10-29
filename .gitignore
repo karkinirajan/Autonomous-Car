@@ -1,0 +1,12 @@
+# Python bytecode and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Local tooling and generated output
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.vscode/settings.local.json

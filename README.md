@@ -8,6 +8,8 @@ A comprehensive repository for understanding the technical components of autonom
 ---
 
 ## Table of Contents
+- [Repository Layout](#repository-layout)
+- [Local Experiments](#local-experiments)
 - [SAE Levels of Automation](#sae-levels-of-automation)
 - [Technical Components](#technical-components)
   - [Perception](#perception)
@@ -31,6 +33,46 @@ A comprehensive repository for understanding the technical components of autonom
 | **5** | Full Automation | Unrestricted ODD; no human intervention required. |
 
 *OEDR: Object/Event Detection & Response
+
+## Repository Layout
+
+This repository is a collection of self-driving-car course work and experiments,
+not a single integrated or safety-validated autonomous driving system.
+
+- `Introduction_to_Self-Driving_Cars/`: introductory course exercises and projects.
+- `Visual_Perception_for_Self_Driving_Cars/`: image and perception assignments.
+- `State_Estimation_and_Localization_for_Self-Driving_Cars/`: localization work.
+- `Motion_Planning_for_Self-Driving_Cars/` and `Codes/Course4FinalProject/`: planning exercises.
+- `Bicycle.py` and `kineticsBicycle.py`: local vehicle-dynamics experiments.
+- `spwaningcar.py`: CARLA simulator camera/vehicle example.
+- `motor.py`: serial motor-controller example.
+
+Course folders may have their own data and runtime assumptions. The root scripts
+are separate from the course projects.
+
+## Local Experiments
+
+Use Python 3 in a virtual environment. The root scripts use NumPy, Matplotlib,
+OpenCV, and PySerial; install the packages needed by the particular exercise:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install numpy matplotlib opencv-python pyserial
+```
+
+`spwaningcar.py` also requires the CARLA simulator and its matching Python API.
+Start CARLA before running that script.
+
+`motor.py` expects a serial controller that accepts newline-terminated
+`speed,in1,in2` values at 9600 baud. It does not open a port on import. Run it
+explicitly with a port, speed, direction, and duration, for example:
+
+```bash
+python motor.py --port /dev/ttyACM0 --speed 80 --direction forward --duration 1
+```
+
+The script sends a zero-speed stop command when its timed run ends.
 
 ---
 
