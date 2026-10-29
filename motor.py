@@ -26,7 +26,9 @@ def main():
     parser.add_argument("--port", required=True, help="serial device, for example /dev/ttyACM0")
     parser.add_argument("--speed", required=True, type=int, help="PWM speed from 0 to 255")
     parser.add_argument("--direction", choices=("forward", "reverse"), required=True)
-    parser.add_argument("--duration", type=float, default=1.0, help="run time in seconds (default: 1)")
+    parser.add_argument(
+        "--duration", type=float, default=1.0, help="run time in seconds (default: 1)"
+    )
     args = parser.parse_args()
 
     if not 0 <= args.speed <= 255:

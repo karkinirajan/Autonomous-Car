@@ -13,6 +13,7 @@ def angle_normalize(a):
 
 def skew_symmetric(v):
     """Skew symmetric form of a 3x1 vector."""
+    v = np.asarray(v).reshape(3)  # accept (3,), (3,1) or (1,3); ragged input fails on NumPy>=1.24
     return np.array(
         [[0, -v[2], v[1]],
          [v[2], 0, -v[0]],

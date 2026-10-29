@@ -1,0 +1,35 @@
+[project]
+name = "autonomous-car"
+version = "1.0.0"
+description = "Self-driving-car course work and experiments: vehicle models, state estimation, planning, perception."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+dependencies = [
+    "numpy>=2",
+    "scipy>=1.14",
+    "matplotlib>=3.9",
+    "opencv-python>=4.10",
+    "pyserial>=3.5",
+]
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [
+    ".",
+    "Codes/Course4FinalProject",
+    "Motion_Planning_for_Self-Driving_Cars/Week_3",
+    "State_Estimation_and_Localization_for_Self-Driving_Cars/Week_5/c2m5_assignment_files",
+]
+
+# Course-provided assignment code and notebooks are kept as distributed; lint covers
+# the code authored here (motor.py and tests/).
+[tool.ruff]
+line-length = 100
+include = ["motor.py", "tests/**/*.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]

@@ -9,6 +9,7 @@ A comprehensive repository for understanding the technical components of autonom
 
 ## Table of Contents
 - [Repository Layout](#repository-layout)
+- [Testing](#testing)
 - [Local Experiments](#local-experiments)
 - [SAE Levels of Automation](#sae-levels-of-automation)
 - [Technical Components](#technical-components)
@@ -50,15 +51,26 @@ not a single integrated or safety-validated autonomous driving system.
 Course folders may have their own data and runtime assumptions. The root scripts
 are separate from the course projects.
 
-## Local Experiments
-
-Use Python 3 in a virtual environment. The root scripts use NumPy, Matplotlib,
-OpenCV, and PySerial; install the packages needed by the particular exercise:
+## Testing
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install numpy matplotlib opencv-python pyserial
+uv run pytest -q
+uv run ruff check . && uv run ruff format --check .
+```
+
+Tests (`tests/`) cover the serial motor command encoding, the Week 3 `priority_dict`, the
+Week 5 `rotations` helpers/`Quaternion`, and `CUtils`. Notebooks and the CARLA scripts
+need the course data or a running simulator and are not covered. Ruff is scoped to
+`motor.py` and `tests/`; course-supplied code is kept as distributed. Pinned versions:
+[VERSIONS.md](./VERSIONS.md).
+
+## Local Experiments
+
+Requires Python 3.13 and [uv](https://docs.astral.sh/uv/). Dependencies (NumPy, SciPy,
+Matplotlib, OpenCV, PySerial) are declared in `pyproject.toml`:
+
+```bash
+uv sync
 ```
 
 `spwaningcar.py` also requires the CARLA simulator and its matching Python API.
@@ -69,7 +81,7 @@ Start CARLA before running that script.
 explicitly with a port, speed, direction, and duration, for example:
 
 ```bash
-python motor.py --port /dev/ttyACM0 --speed 80 --direction forward --duration 1
+uv run python motor.py --port /dev/ttyACM0 --speed 80 --direction forward --duration 1
 ```
 
 The script sends a zero-speed stop command when its timed run ends.
